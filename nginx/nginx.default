@@ -25,6 +25,14 @@ server {
     proxy_next_upstream error timeout invalid_header http_500 http_502 http_503 http_504;
     proxy_buffering off;
   }
+
+  location /viewer {
+    proxy_pass {{ui_backend}};
+    auth_request /auth;
+    proxy_next_upstream error timeout invalid_header http_500 http_502 http_503 http_504;
+    proxy_buffering off;
+  }
+
   location /v1/_ping {
     auth_basic off;
     proxy_pass {{backend}};
